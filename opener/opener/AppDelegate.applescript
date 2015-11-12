@@ -13,9 +13,13 @@ script AppDelegate
 	property theWindow : missing value
 	
 	on applicationWillFinishLaunching_(aNotification)
+        try
         tell application "System Events" to tell process "OpenPlex"
             click menu bar item 1 of menu bar 2
         end tell
+        on error
+            display dialog "You must allow opener.app in System Preferences/security & privacy/privacy to Open OpenPlex after updating to latest version."
+        end try
 	end applicationWillFinishLaunching_
 	
 	on applicationShouldTerminate_(sender)
